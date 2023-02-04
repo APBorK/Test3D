@@ -28,4 +28,9 @@ public class Movement : MonoBehaviour
                 new Vector3(hitInfo.point.x,transform.position.y,hitInfo.point.z),Time.fixedDeltaTime * _speed);
         }
     }
+    
+    void StepСount()
+    {
+        
+    }
 }

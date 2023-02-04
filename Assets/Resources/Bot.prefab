@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1735655748356107729}
   - component: {fileID: 6294301713417814474}
   - component: {fileID: 7140301844749669604}
+  - component: {fileID: 9023601670429532407}
+  - component: {fileID: 3606561339873010359}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
@@ -97,3 +99,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9023601670429532407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809104725700316659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd3fa0636a54a1488b4e2753414af0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &3606561339873010359
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6809104725700316659}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
