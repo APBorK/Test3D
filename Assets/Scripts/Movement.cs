@@ -22,14 +22,22 @@ public class Movement : MonoBehaviour
             if (Physics.Raycast(myRay,out hitInfo))
             {
                 _queuePosition.Enqueue(new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z));
+                if (hitInfo.collider.tag == "Player")
+                {
+                    _queuePosition.Clear();
+                    transform.position = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
+                }
             }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            _moveGo = true;
-            _newPosition = _queuePosition.Dequeue();
-            _distantion =  Vector3.Distance(_newPosition, transform.position);
+            if (_queuePosition.Count != 0)
+            {
+                _moveGo = true;
+                _newPosition = _queuePosition.Dequeue();
+                _distantion =  Vector3.Distance(_newPosition, transform.position);
+            }
         }
 
         if (_moveGo)
