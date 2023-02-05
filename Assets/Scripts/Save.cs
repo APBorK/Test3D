@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class Save : MonoBehaviour
@@ -9,6 +8,8 @@ public class Save : MonoBehaviour
     {
         _point = PlayerPrefs.GetFloat(Key.Point);
         _distanse = PlayerPrefs.GetFloat(Key.Pedometer);
+        EventSistem.OnKillBot += AddPoint;
+        EventSistem.OnMovePlayer += AddDistanse;
     }
     void AddPoint()
     {
