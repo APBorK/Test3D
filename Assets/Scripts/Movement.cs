@@ -1,36 +1,60 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
     [SerializeField] float _speed;
-    Vector3 _startPosition;
-
-    private void Start()
-    {
-        _startPosition = transform.position;
-    }
+    private Vector3 _newPosition;
+    private float _distantion;
+    private float _newDistanse;
+    private float _allDistanse;
+    private bool _moveGo = false;
+    private bool _startCounter;
 
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0) || _startPosition!=transform.position)
+        if (Input.GetMouseButton(0))
+        {
+            Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+            if (Physics.Raycast(myRay,out hitInfo))
+            {
+                _moveGo = true;
+                _newPosition = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
+                _distantion =  Vector3.Distance(_newPosition, transform.position);
+                Debug.Log(_distantion);
+            }
+        }
+
+        if (_moveGo)
         {
             Move();
+            CounterMove();
+            _startCounter = true;
         }
-    }
- 
-    void Move()
-    {
-        Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitInfo;
-        if (Physics.Raycast(myRay,out hitInfo))
+            
+
+        if ( Vector3.Distance(_newPosition,  transform.position) <=1)
         {
-            transform.position = Vector3.Lerp(transform.position,
-                new Vector3(hitInfo.point.x,transform.position.y,hitInfo.point.z),Time.fixedDeltaTime * _speed);
+            _moveGo = false;
+            if (_startCounter)
+            {
+                EventSistem.SendMovePlayer(_allDistanse);
+                _startCounter = false;
+            }
+            
         }
     }
     
-    void StepСount()
+    private void Move()
     {
-        
+        transform.position = Vector3.Lerp(transform.position, new Vector3(_newPosition.x, _newPosition.y, _newPosition.z),Time.fixedDeltaTime * _speed);
     }
+
+    private void CounterMove()
+    {
+        _newDistanse = Mathf.Lerp(_allDistanse,_distantion,Time.fixedDeltaTime * _speed);
+        _allDistanse = _newDistanse;
+    }
+    
 }

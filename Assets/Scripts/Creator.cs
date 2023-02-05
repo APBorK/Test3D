@@ -5,21 +5,15 @@ using UnityEngine;
 public class Creator : MonoBehaviour
 {
     [SerializeField] int _countBot;
-    private float _minX; 
-    private float _minZ;
-    private float _maxX;
-    private float _maxZ;
+    private float _range;
     private float _minTime = 1f;
     private float _maxTime = 3f;
-    private List<GameObject> _bot = new List<GameObject>();
+    private Queue<GameObject> _bot = new Queue<GameObject>();
 
 
     void Start()
     {
-        _maxX = transform.localScale.x;
-        _minX = -_maxX;
-        _maxZ = transform.localScale.z;
-        _minZ = -_maxZ;
+        _range = transform.localScale.x;
         RecordListBot();
         StartCoroutine(TimerSpawn());
     }
@@ -28,8 +22,7 @@ public class Creator : MonoBehaviour
     {
         for (int i = 0; i < _countBot; i++)
         {
-            _bot.Add(Instantiate(Resources.Load<GameObject>("Bot")));
-            _bot[i].SetActive(false);
+            _bot.Enqueue(Instantiate(Resources.Load<GameObject>("Bot")));
         }
     }
 
@@ -47,17 +40,20 @@ public class Creator : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            if (_bot[i].activeSelf == false)
+            Vector3 position = new Vector3(Random.Range(_range,-_range),transform.position.y,
+                Random.Range(_range,-_range));
+            GameObject bot = _bot.Dequeue();
+            if (bot.activeSelf == false)
             {
-                Vector3 position = new Vector3(Random.Range(_minX,_maxX),transform.position.y,
-                    Random.Range(_minZ,_maxZ));
-                _bot[i].SetActive(true);
-                _bot[i].transform.position = position;
+                bot.SetActive(true);
+                bot.transform.position = position;
+                
             }
             else if (count < _countBot)
             {
                 count++;
             }
+            _bot.Enqueue(bot);
         }
     }
 }
