@@ -11,8 +11,8 @@ public class UIControler : MonoBehaviour
 
     private void Start()
     {
-        float point = PlayerPrefs.GetFloat(Key.Point);
-        float distanse = PlayerPrefs.GetFloat(Key.Pedometer);
+        float point = PlayerPrefs.GetFloat(Keys.Point);
+        float distanse = PlayerPrefs.GetFloat(Keys.Pedometer);
         RecordText(_pointText,point);
         RecordText(_pedometerText,distanse);
         EventSistem.OnKillBotPoint += AddPoint;

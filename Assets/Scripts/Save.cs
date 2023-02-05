@@ -6,8 +6,8 @@ public class Save : MonoBehaviour
     private float _distanse;
     void Start()
     {
-        _point = PlayerPrefs.GetFloat(Key.Point);
-        _distanse = PlayerPrefs.GetFloat(Key.Pedometer);
+        _point = PlayerPrefs.GetFloat(Keys.Point);
+        _distanse = PlayerPrefs.GetFloat(Keys.Pedometer);
         EventSistem.OnKillBot += AddPoint;
         EventSistem.OnMovePlayer += AddDistanse;
     }

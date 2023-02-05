@@ -4,7 +4,7 @@ public class Bot : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(Tag.Player))
+        if (collision.gameObject.CompareTag(Tags.Player))
         {
             EventSistem.SendKillBot();
             gameObject.SetActive(false);
