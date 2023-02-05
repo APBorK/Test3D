@@ -17,9 +17,9 @@ public class EventSistem
     
     public static void SendKillBotPoint(float point)
     {
-        if (OnMovePlayer != null)
+        if (OnKillBotPoint != null)
         {
-            OnMovePlayer.Invoke(point);
+            OnKillBotPoint.Invoke(point);
         }
     }
     
@@ -33,9 +33,9 @@ public class EventSistem
     
     public static void SendMovePlayerDistanse(float distanse)
     {
-        if (OnMovePlayer != null)
+        if (OnMovePlayerDistanse != null)
         {
-            OnMovePlayer.Invoke(distanse);
+            OnMovePlayerDistanse.Invoke(distanse);
         }
     }
 }
