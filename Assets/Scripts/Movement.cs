@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     private bool _startCounter;
     private Queue<Vector3> _queuePosition = new Queue<Vector3>();
     private LineRenderer _path;
+    private bool _stopMove;
 
     void Update()
     {
@@ -22,8 +23,9 @@ public class Movement : MonoBehaviour
             if (Physics.Raycast(myRay,out hitInfo))
             {
                 _queuePosition.Enqueue(new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z));
-                if (hitInfo.collider.tag == "Player")
+                if (hitInfo.collider.gameObject.CompareTag(Tags.Player))
                 {
+                    _stopMove = true;
                     _queuePosition.Clear();
                     transform.position = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
                 }
@@ -32,11 +34,15 @@ public class Movement : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (_queuePosition.Count != 0)
+            if (!_stopMove)
             {
                 _move = true;
                 _newPosition = _queuePosition.Dequeue();
                 _distantion =  Vector3.Distance(_newPosition, transform.position);
+            }
+            else
+            {
+                _stopMove = true;
             }
         }
 
@@ -48,7 +54,7 @@ public class Movement : MonoBehaviour
         }
             
 
-        if ( Vector3.Distance(_newPosition,  transform.position) <=1)
+        if (Vector3.Distance(_newPosition,  transform.position) <=0.2f)
         {
             if (_queuePosition.Count != 0)
             {
@@ -66,6 +72,7 @@ public class Movement : MonoBehaviour
                 _startCounter = false;
             }
         }
+        
     }
     
     private void Move()
@@ -75,7 +82,7 @@ public class Movement : MonoBehaviour
 
     private void CounterMove()
     {
-        _newDistanse = Mathf.Lerp(_allDistanse,_distantion,Time.fixedDeltaTime * _speed);
+        _newDistanse = Mathf.Lerp(_allDistanse,_distantion,Time.deltaTime);
         _allDistanse = _newDistanse;
     }
     
