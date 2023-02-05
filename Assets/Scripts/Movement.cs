@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -24,8 +22,6 @@ public class Movement : MonoBehaviour
             if (Physics.Raycast(myRay,out hitInfo))
             {
                 _queuePosition.Enqueue(new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z));
-               
-                Debug.Log(_distantion);
             }
         }
 
