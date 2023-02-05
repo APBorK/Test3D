@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class FalseActive : MonoBehaviour
+public class Bot : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag(Tag.Player))
         {
             EventSistem.SendKillBot();
             gameObject.SetActive(false);

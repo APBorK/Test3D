@@ -4,6 +4,8 @@ public class EventSistem
 {
     public static Action OnKillBot;
     public static Action<float> OnMovePlayer;
+    public static Action<float> OnKillBotPoint;
+    public static Action<float> OnMovePlayerDistanse;
 
     public static void SendKillBot()
     {
@@ -12,8 +14,24 @@ public class EventSistem
             OnKillBot.Invoke();
         }
     }
-
+    
+    public static void SendKillBotPoint(float point)
+    {
+        if (OnMovePlayer != null)
+        {
+            OnMovePlayer.Invoke(point);
+        }
+    }
+    
     public static void SendMovePlayer(float distanse)
+    {
+        if (OnMovePlayer != null)
+        {
+            OnMovePlayer.Invoke(distanse);
+        }
+    }
+    
+    public static void SendMovePlayerDistanse(float distanse)
     {
         if (OnMovePlayer != null)
         {
